@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: ai-candidate-pipeline-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8000 --app-dir backend
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DATABASE_URL
+        fromDatabase:
+          name: postgres
+          property: connectionString
+      - key: GROQ_API_KEY
+        sync: false
+      - key: API_CORS_ORIGINS
+        value: https://your-frontend.vercel.app
+      - key: STORAGE_DIR
+        value: /opt/render/storage
+    autoDeploy: true
+    rootDir: backend
+
+databases:
+  - name: postgres
+    databaseName: ai_pipeline_db
+    user: postgres
+    plan: starter
