@@ -23,5 +23,4 @@ services:
 databases:
   - name: postgres
     databaseName: ai_pipeline_db
-    user: postgres
     plan: starter
