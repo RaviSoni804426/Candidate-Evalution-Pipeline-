@@ -1,3 +1,11 @@
+---
+title: AI Candidate Evaluation Pipeline
+emoji: 📊
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
 # AI Candidate Evaluation Pipeline
 
 End-to-end AI recruitment screening product with a FastAPI backend and a React frontend.
