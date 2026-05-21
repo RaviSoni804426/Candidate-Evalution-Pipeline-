@@ -43,6 +43,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+project_root = Path(__file__).resolve().parents[2]
+frontend_dist_dir = project_root / "frontend" / "dist"
 uploads_dir = settings.storage_dir / "resumes"
 uploads_dir.mkdir(parents=True, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=settings.storage_dir), name="uploads")
@@ -381,3 +383,7 @@ def dashboard_snapshot(db: Session = Depends(get_db)) -> JSONResponse:
             "candidates": [jsonable_encoder(serialize_candidate(candidate)) for candidate in candidates],
         }
     )
+
+
+if frontend_dist_dir.exists():
+    app.mount("/", StaticFiles(directory=frontend_dist_dir, html=True), name="frontend")
